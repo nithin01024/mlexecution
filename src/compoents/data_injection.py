@@ -7,6 +7,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 from src.compoents.data_transformantion import datatransformation,datatransformationconfig
+from src.compoents.model_trainer import modeltrainerconfig,modeltrainer
 
 @dataclass
 class Datainjectionconfig:
@@ -44,4 +45,6 @@ if __name__=='__main__':
     train_data,test_data = obj.initiate_data_ingestion()
 
     data_transformation = datatransformation()
-    data_transformation.initiate_data_transformation(train_data,test_data)
+    train_arr,test_arr,preprocessor_path = data_transformation.initiate_data_transformation(train_data,test_data)
+    modeltrainer=modeltrainer()
+    print(modeltrainer.initiate_model_training(train_arr,test_arr))
